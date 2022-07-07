@@ -2,7 +2,15 @@
 <h3><%= @restaurant.category %></h3>
 <p><%= @restaurant.address %>, <%= @restaurant.phone_number %></p>
 
-<%= link_to "See all restaurants", restaurants_path %> |
+
+<%# <li class="list-group-item"> %>
+  <%# <%= review.content %> %>
+  <%# <%= link_to "Remove", %>
+              <%# review_path(review), %>
+              <%# method: :delete, %>
+              <%# data: { confirm: "Are you sure?" } %> %>
+<%# </li> %>
+
 <%= link_to 'Edit', edit_restaurant_path(@restaurant) %> |
 <%= link_to 'Back', restaurants_path %> |
 <%= link_to 'Leave a review', new_restaurant_review_path(@restaurant) %>
