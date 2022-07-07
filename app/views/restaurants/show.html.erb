@@ -1,16 +1,27 @@
 <h1><%= @restaurant.name %></h1>
 <h3><%= @restaurant.category %></h3>
+
+<% sum_of_ratings = 0 %>
+<% number_of_reviews = 0 %>
+<% @restaurant.reviews.each do |review| %>
+  <% sum_of_ratings += review.rating %>
+  <% number_of_reviews += 1 %>
+<% end %>
+<% rating = sum_of_ratings.to_f / number_of_reviews %>
+<h1><%= rating.round(2) %></h1>
+
 <p><%= @restaurant.address %>, <%= @restaurant.phone_number %></p>
 
-
-<%# <li class="list-group-item"> %>
-  <%# <%= review.content %> %>
-  <%# <%= link_to "Remove", %>
-              <%# review_path(review), %>
-              <%# method: :delete, %>
-              <%# data: { confirm: "Are you sure?" } %> %>
-<%# </li> %>
+<% @restaurant.reviews.each do |review| %>
+  <li class="list-group-item">
+    <%= review.content %> - <%= review.rating %> <%= "*" * review.rating %>
+    <%= link_to "Remove",
+                review_path(review),
+                method: :delete,
+                data: { confirm: "Are you sure?" } %>
+  </li>
+<% end %>
 
 <%= link_to 'Edit', edit_restaurant_path(@restaurant) %> |
 <%= link_to 'Back', restaurants_path %> |
-<%= link_to 'Leave a review', new_restaurant_review_path(@restaurant) %>
+<%= link_to 'Add a review', new_restaurant_review_path(@restaurant) %>

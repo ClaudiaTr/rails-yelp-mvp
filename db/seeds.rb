@@ -14,14 +14,21 @@ puts 'Datebase clean'
 puts 'Creating restaurants with reviews...'
 
 10.times do
-  restaurant = Restaurant.create(
+  restaurant = Restaurant.create!(
     name: Faker::Restaurant.name,
     address: Faker::Address.street_address,
     phone_number: Faker::PhoneNumber.cell_phone_in_e164,
-    category: Faker::Restaurant.type
+    category: ["chinese", "italian", "japanese", "french", "belgian"].sample
   )
   puts "Created restaurant #{restaurant.name}"
   puts "Creating reviews..."
+  rand(1..10).times do
+    review = Review.create!(
+      content: ["so delicious", "I like it", "anytime again", "never again", "bad", "really bad", "would not go again", "not recommended", "absolutely recommend", "it's okay"].sample,
+      rating: rand(1..5),
+      restaurant_id: restaurant.id
+    )
+  end
 end
 
 puts 'All restaurants successfully created'
